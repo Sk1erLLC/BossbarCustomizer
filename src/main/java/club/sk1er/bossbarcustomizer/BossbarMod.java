@@ -25,12 +25,10 @@ public class BossbarMod {
     public static final String NAME = "Bossbar Customizer";
     public static final String MODID = "bossbar_customizer";
     public static final String VERSION = "1.0";
-
-    private File configFile;
-    private boolean gui;
-
     @Mod.Instance(MODID)
     public static BossbarMod INSTANCE;
+    private File configFile;
+    private boolean gui;
 
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
@@ -54,6 +52,7 @@ public class BossbarMod {
             jsonObject.addProperty("BOSSBAR_BAR", BossbarConfig.BOSSBAR_BAR);
             jsonObject.addProperty("BOSSBAR_X", BossbarConfig.BOSSBAR_X);
             jsonObject.addProperty("BOSSBAR_Y", BossbarConfig.BOSSBAR_Y);
+            jsonObject.addProperty("SCALE", BossbarConfig.SCALE);
             FileUtils.writeStringToFile(configFile, jsonObject.toString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,11 +77,14 @@ public class BossbarMod {
             }
 
             if (object.has("BOSSBAR_X")) {
-                BossbarConfig.BOSSBAR_X = object.get("BOSSBAR_X").getAsInt();
+                BossbarConfig.BOSSBAR_X = object.get("BOSSBAR_X").getAsDouble();
             }
 
             if (object.has("BOSSBAR_Y")) {
-                BossbarConfig.BOSSBAR_X = object.get("BOSSBAR_Y").getAsInt();
+                BossbarConfig.BOSSBAR_X = object.get("BOSSBAR_Y").getAsDouble();
+            }
+            if (object.has("SCALE")) {
+                BossbarConfig.SCALE = object.get("SCALE").getAsDouble();
             }
 
         } catch (IOException e) {

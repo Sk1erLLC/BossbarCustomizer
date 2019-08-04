@@ -20,50 +20,38 @@ public class GuiIngameHook extends Gui {
 
             FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
             ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
-            int scaledWidth = resolution.getScaledWidth();
+            double scaledWidth = resolution.getScaledWidth();
+            double scaledHeight = resolution.getScaledHeight();
+
             String bossName = BossStatus.bossName;
 
             if (BossbarConfig.BOSSBAR_TEXT) {
-                if (BossbarConfig.BOSSBAR_X != -1) {
-                    fontRenderer.drawStringWithShadow(bossName, (float) (BossbarConfig.BOSSBAR_X + 91 - fontRenderer.getStringWidth(bossName) / 2),
-                            BossbarConfig.BOSSBAR_Y - 10, -1);
-                } else {
-                    fontRenderer.drawStringWithShadow(bossName, (float) (scaledWidth / 2 - fontRenderer.getStringWidth(bossName) / 2), BossbarConfig.BOSSBAR_Y - 10, -1);
-                }
-
+                GlStateManager.pushMatrix();
+                GlStateManager.translate(scaledWidth * BossbarConfig.BOSSBAR_X, scaledHeight * BossbarConfig.BOSSBAR_Y - (10D * BossbarConfig.SCALE), 0);
+                GlStateManager.scale(BossbarConfig.SCALE, BossbarConfig.SCALE, BossbarConfig.SCALE);
+                GlStateManager.translate(-fontRenderer.getStringWidth(bossName) / 2F , 0, 0);
+                fontRenderer.drawStringWithShadow(bossName, 0, 0, -1);
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 Minecraft.getMinecraft().getTextureManager().bindTexture(Gui.icons);
+                GlStateManager.popMatrix();
             }
 
             int widthLocation = 182;
 
             if (BossbarConfig.BOSSBAR_BAR) {
-                int healthScale = (int) (BossStatus.healthScale * (float) (widthLocation + 1));
+                int healthScale = (int) (BossStatus.healthScale * (float) (widthLocation + 1) * BossbarConfig.SCALE);
 
-                if (BossbarConfig.BOSSBAR_X != -1) {
-                    guiIngame.drawTexturedModalRect(BossbarConfig.BOSSBAR_X, BossbarConfig.BOSSBAR_Y, 0, 74, widthLocation, 5);
+                GlStateManager.pushMatrix();
+                GlStateManager.translate(BossbarConfig.BOSSBAR_X * scaledWidth - widthLocation / 2F * BossbarConfig.SCALE, BossbarConfig.BOSSBAR_Y * scaledHeight , 0);
+                GlStateManager.scale(BossbarConfig.SCALE, BossbarConfig.SCALE, BossbarConfig.SCALE);
 
-                    if (healthScale > 0) {
-                        guiIngame.drawTexturedModalRect(BossbarConfig.BOSSBAR_X, BossbarConfig.BOSSBAR_Y, 0, 79, widthLocation, 5);
-                    }
-                } else {
-                    int xLocation = scaledWidth / 2 - widthLocation / 2;
-
-                    guiIngame.drawTexturedModalRect(xLocation, BossbarConfig.BOSSBAR_Y, 0, 74, widthLocation, 5);
-
-                    if (healthScale > 0) {
-                        guiIngame.drawTexturedModalRect(xLocation, BossbarConfig.BOSSBAR_Y, 0, 79, widthLocation, 5);
-                    }
+                guiIngame.drawTexturedModalRect(0, 0, 0, 74, widthLocation, 5);
+                if (healthScale > 0) {
+                    guiIngame.drawTexturedModalRect(0, 0, 0, 79, widthLocation, 5);
                 }
+                GlStateManager.popMatrix();
             }
 
-            if (BossbarConfig.BOSSBAR_TEXT) {
-                if (BossbarConfig.BOSSBAR_X != -1) {
-                    fontRenderer.drawStringWithShadow(bossName, (float) (BossbarConfig.BOSSBAR_X + widthLocation / 2 - fontRenderer.getStringWidth(bossName) / 2), BossbarConfig.BOSSBAR_Y - 10, -1);
-                } else {
-                    fontRenderer.drawStringWithShadow(bossName, (float) (scaledWidth / 2 - fontRenderer.getStringWidth(bossName) / 2), BossbarConfig.BOSSBAR_Y - 10, -1);
-                }
-            }
         }
     }
 }
