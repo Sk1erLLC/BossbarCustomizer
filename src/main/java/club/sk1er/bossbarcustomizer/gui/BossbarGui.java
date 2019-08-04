@@ -106,7 +106,6 @@ public class BossbarGui extends GuiScreen {
                 BossbarConfig.BOSSBAR_Y = 10 / (double) height;
             if (BossbarConfig.BOSSBAR_Y * height + 5 > height)
                 BossbarConfig.BOSSBAR_Y = (height - 5) / (double) height;
-            System.out.println("s");
             this.lastMouseX = mouseX;
             this.lastMouseY = mouseY;
             this.updated = true;
