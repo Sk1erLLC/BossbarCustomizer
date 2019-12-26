@@ -1,0 +1,3 @@
+<br>
+<p>Bossbar Customizer allows for customization of the ingame bossbar to your liking, including size, position, elements, etc.</p>
+<br>
