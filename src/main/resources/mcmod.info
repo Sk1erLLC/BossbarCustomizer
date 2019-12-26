@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "bossbar_customizer",
+    "name": "Bossbar Customizer",
+    "description": "Customize your bossbar however to your preferences.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Sk1er LLC"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
