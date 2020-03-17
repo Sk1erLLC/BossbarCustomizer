@@ -51,14 +51,8 @@ public class BossbarGui extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawCenteredString(mc.fontRendererObj, "Bossbar Mod " + BossbarMod.VERSION, width / 2, calculateHeight(-1), -1);
+        drawCenteredString(mc.fontRendererObj, "BossbarCustomizer " + BossbarMod.VERSION, width / 2, calculateHeight(-1), -1);
         super.drawScreen(mouseX, mouseY, partialTicks);
-
-//        int startX = (int) (BossbarConfig.BOSSBAR_X * width) - 182 / 2;
-//        int startY = (int) (BossbarConfig.BOSSBAR_Y * height) - 10;
-//        int endX = (int) (startX + 182 * BossbarConfig.SCALE);
-//        int endY = (int) (startY + (15 * BossbarConfig.SCALE));
-//        drawRect(startX, startY, endX, endY, new Color(0, 0, 0, 200).getRGB());
     }
 
     @Override
@@ -141,10 +135,12 @@ public class BossbarGui extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
+        BossbarMod.INSTANCE.getBossbarConfig().markDirty();
+        BossbarMod.INSTANCE.getBossbarConfig().writeData();
+
         BossStatus.bossName = previousBossName;
         BossStatus.statusBarTime = previousStatusBarTime;
         BossStatus.healthScale = previousHealthScale;
-        BossbarMod.INSTANCE.saveConfig();
         super.onGuiClosed();
     }
 

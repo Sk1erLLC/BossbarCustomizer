@@ -4,6 +4,7 @@ import club.sk1er.bossbarcustomizer.asm.GuiIngameTransformer;
 import club.sk1er.bossbarcustomizer.tweaker.transform.ITransformer;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import java.util.Collection;
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,11 +12,9 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
 
-import java.util.Collection;
-
 public class ClassTransformer implements IClassTransformer {
 
-    private static final Logger LOGGER = LogManager.getLogger("Bossbar Mod");
+    private static final Logger LOGGER = LogManager.getLogger("BossbarCustomizer");
     private final Multimap<String, ITransformer> transformerMap = ArrayListMultimap.create();
 
     public ClassTransformer() {
@@ -41,10 +40,10 @@ public class ClassTransformer implements IClassTransformer {
         ClassNode node = new ClassNode();
         reader.accept(node, ClassReader.EXPAND_FRAMES);
 
-        transformers.forEach(transformer -> {
+        for (ITransformer transformer : transformers) {
             LOGGER.info("Applying transformer {} on {}...", transformer.getClass().getName(), transformedName);
             transformer.transform(node, transformedName);
-        });
+        }
 
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
 

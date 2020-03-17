@@ -1,6 +1,7 @@
 package club.sk1er.bossbarcustomizer.command;
 
-import club.sk1er.bossbarcustomizer.BossbarMod;
+import club.sk1er.bossbarcustomizer.gui.BossbarGui;
+import club.sk1er.mods.core.ModCore;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 
@@ -17,7 +18,7 @@ public class BossbarCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
-        BossbarMod.INSTANCE.initializeGui();
+        ModCore.getInstance().getGuiHandler().open(new BossbarGui());
     }
 
     @Override

@@ -5,6 +5,8 @@ buildscript {
             name = "forge"
             url = "https://files.minecraftforge.net/maven"
         }
+
+        flatDir dirs: 'libs'
     }
     dependencies {
         classpath "net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT"
@@ -25,11 +27,8 @@ minecraft {
     mappings = project.mcpVersion
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
+    provided files("libs/modcore.jar")
 }
 
 processResources {

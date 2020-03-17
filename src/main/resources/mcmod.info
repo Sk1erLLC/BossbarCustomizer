@@ -1,7 +1,7 @@
 [
   {
     "modid": "bossbar_customizer",
-    "name": "Bossbar Customizer",
+    "name": "BossbarCustomizer",
     "description": "Customize your bossbar however to your preferences.",
     "version": "${version}",
     "mcversion": "${mcversion}",
