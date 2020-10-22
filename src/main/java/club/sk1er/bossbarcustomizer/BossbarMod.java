@@ -14,7 +14,7 @@ public class BossbarMod {
 
     public static final String NAME = "BossbarCustomizer";
     public static final String MODID = "bossbar_customizer";
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.2";
 
     @Mod.Instance(MODID)
     public static BossbarMod INSTANCE;
@@ -26,6 +26,7 @@ public class BossbarMod {
         ModCoreInstaller.initializeModCore(Minecraft.getMinecraft().mcDataDir);
         bossbarConfig = new BossbarConfig();
         bossbarConfig.preload();
+
         ClientCommandHandler.instance.registerCommand(new BossbarCommand());
         MinecraftForge.EVENT_BUS.register(this);
     }

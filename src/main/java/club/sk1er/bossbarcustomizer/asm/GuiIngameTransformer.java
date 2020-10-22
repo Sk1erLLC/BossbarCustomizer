@@ -16,7 +16,7 @@ public class GuiIngameTransformer implements ITransformer {
         for (MethodNode methodNode : classNode.methods) {
             String methodName = mapMethodName(classNode, methodNode);
 
-            if (methodName.equalsIgnoreCase("renderBossHealth") || methodName.equalsIgnoreCase("func_73828_d")) {
+            if (methodName.equals("renderBossHealth") || methodName.equals("func_73828_d")) {
                 methodNode.instructions.clear();
                 methodNode.localVariables.clear();
                 methodNode.instructions.insert(replaceCode());
