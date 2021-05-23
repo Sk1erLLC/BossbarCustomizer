@@ -1,4 +1,4 @@
-package club.sk1er.bossbarcustomizer.tweaker.transform;
+package club.sk1er.bossbarcustomizer.forge.transform;
 
 
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;

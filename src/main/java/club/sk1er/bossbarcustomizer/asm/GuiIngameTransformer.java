@@ -1,6 +1,6 @@
 package club.sk1er.bossbarcustomizer.asm;
 
-import club.sk1er.bossbarcustomizer.tweaker.transform.ITransformer;
+import club.sk1er.bossbarcustomizer.forge.transform.ITransformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
 

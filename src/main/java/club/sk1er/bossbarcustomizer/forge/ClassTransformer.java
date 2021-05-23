@@ -1,7 +1,7 @@
-package club.sk1er.bossbarcustomizer.tweaker;
+package club.sk1er.bossbarcustomizer.forge;
 
 import club.sk1er.bossbarcustomizer.asm.GuiIngameTransformer;
-import club.sk1er.bossbarcustomizer.tweaker.transform.ITransformer;
+import club.sk1er.bossbarcustomizer.forge.transform.ITransformer;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import java.util.Collection;

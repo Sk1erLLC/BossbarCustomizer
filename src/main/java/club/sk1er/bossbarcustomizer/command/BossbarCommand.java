@@ -1,28 +1,17 @@
 package club.sk1er.bossbarcustomizer.command;
 
 import club.sk1er.bossbarcustomizer.gui.BossbarGui;
-import club.sk1er.mods.core.ModCore;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommandSender;
+import gg.essential.api.commands.Command;
+import gg.essential.api.commands.DefaultHandler;
+import gg.essential.api.utils.GuiUtil;
 
-public class BossbarCommand extends CommandBase {
-    @Override
-    public String getCommandName() {
-        return "bossbar";
+public class BossbarCommand extends Command {
+    public BossbarCommand() {
+        super("bossbar");
     }
 
-    @Override
-    public String getCommandUsage(ICommandSender sender) {
-        return "/bossbar";
-    }
-
-    @Override
-    public void processCommand(ICommandSender sender, String[] args) {
-        ModCore.getInstance().getGuiHandler().open(new BossbarGui());
-    }
-
-    @Override
-    public int getRequiredPermissionLevel() {
-        return -1;
+    @DefaultHandler
+    public void handle() {
+        GuiUtil.open(new BossbarGui());
     }
 }
