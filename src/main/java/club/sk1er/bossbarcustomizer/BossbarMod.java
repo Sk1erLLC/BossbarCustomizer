@@ -48,8 +48,6 @@ public class BossbarMod {
         } catch (IOException e) {
             this.logger.error("Failed to load config.", e);
         }
-
-        System.out.println("loaded config");
     }
 
     public void saveConfig() {
@@ -65,8 +63,6 @@ public class BossbarMod {
         } catch (IOException e) {
             this.logger.error("Failed to write config.", e);
         }
-
-        System.out.println("saved config");
     }
 
     @Mod.EventHandler
