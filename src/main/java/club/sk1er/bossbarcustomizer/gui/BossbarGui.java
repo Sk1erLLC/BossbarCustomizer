@@ -111,9 +111,10 @@ public class BossbarGui extends GuiScreen {
                 BossbarConfig.BOSSBAR_ALL = true;
                 BossbarConfig.BOSSBAR_TEXT = true;
                 BossbarConfig.BOSSBAR_BAR = true;
-                BossbarConfig.BOSSBAR_X = .5;
-                BossbarConfig.BOSSBAR_Y = .05;
+                BossbarConfig.BOSSBAR_X = 0.5;
+                BossbarConfig.BOSSBAR_Y = 0.025;
                 BossbarConfig.SCALE = 1.0;
+                BossbarMod.INSTANCE.saveConfig();
                 initGui();
                 break;
         }
@@ -132,7 +133,7 @@ public class BossbarGui extends GuiScreen {
                 return;
             }
 
-            int startX = (int) ((BossbarConfig.BOSSBAR_X * width) - (182 / 2 * BossbarConfig.SCALE));
+            int startX = (int) ((BossbarConfig.BOSSBAR_X * width) - ((182 >> 1) * BossbarConfig.SCALE));
             int startY = (int) (BossbarConfig.BOSSBAR_Y * height) - 10;
             int endX = (int) (startX + 182 * BossbarConfig.SCALE);
             int endY = (int) (startY + (15 * BossbarConfig.SCALE));
@@ -152,9 +153,6 @@ public class BossbarGui extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
-        BossbarMod.INSTANCE.getBossbarConfig().markDirty();
-        BossbarMod.INSTANCE.getBossbarConfig().writeData();
-
         if (previousBossName != null) {
             BossStatus.bossName = previousBossName;
             BossStatus.statusBarTime = previousStatusBarTime;
@@ -165,6 +163,7 @@ public class BossbarGui extends GuiScreen {
             BossStatus.healthScale = 0;
         }
 
+        BossbarMod.INSTANCE.saveConfig();
         super.onGuiClosed();
     }
 

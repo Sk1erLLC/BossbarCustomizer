@@ -34,14 +34,11 @@ public class ClassTransformer implements IClassTransformer {
         Collection<ITransformer> transformers = transformerMap.get(transformedName);
         if (transformers.isEmpty()) return bytes;
 
-        LOGGER.info("Found {} transformers for {}", transformers.size(), transformedName);
-
         ClassReader reader = new ClassReader(bytes);
         ClassNode node = new ClassNode();
         reader.accept(node, ClassReader.EXPAND_FRAMES);
 
         for (ITransformer transformer : transformers) {
-            LOGGER.info("Applying transformer {} on {}...", transformer.getClass().getName(), transformedName);
             transformer.transform(node, transformedName);
         }
 
@@ -50,8 +47,7 @@ public class ClassTransformer implements IClassTransformer {
         try {
             node.accept(writer);
         } catch (Throwable t) {
-            LOGGER.error("Exception when transforming " + transformedName + " : " + t.getClass().getSimpleName());
-            t.printStackTrace();
+            LOGGER.error("Exception when transforming " + transformedName + " : " + t.getClass().getSimpleName(), t);
         }
 
         return writer.toByteArray();

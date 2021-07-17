@@ -8,14 +8,16 @@ import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.boss.BossStatus;
+import net.minecraftforge.client.GuiIngameForge;
 
+@SuppressWarnings("unused")
 public class GuiIngameHook extends Gui {
 
     private static final GuiIngame guiIngame = new GuiIngame(Minecraft.getMinecraft());
 
     @SuppressWarnings("unused")
     public static void renderBossbarHealth() {
-        if (BossStatus.bossName != null && BossStatus.statusBarTime > 0 && BossbarConfig.BOSSBAR_ALL) {
+        if (BossStatus.bossName != null && BossStatus.statusBarTime > 0 && BossbarConfig.BOSSBAR_ALL && GuiIngameForge.renderBossHealth) {
             --BossStatus.statusBarTime;
 
             FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
@@ -25,12 +27,13 @@ public class GuiIngameHook extends Gui {
 
             if (BossbarConfig.BOSSBAR_BAR) {
                 int widthLocation = 182;
-                int healthScale = (int) (BossStatus.healthScale * (float) (widthLocation + 1) * BossbarConfig.SCALE);
+                int healthScale = (int) (BossStatus.healthScale * (float) (widthLocation + 1));
 
                 GlStateManager.pushMatrix();
-                GlStateManager.translate(BossbarConfig.BOSSBAR_X * scaledWidth - widthLocation / 2F * BossbarConfig.SCALE, BossbarConfig.BOSSBAR_Y * scaledHeight, 0);
+                GlStateManager.translate((BossbarConfig.BOSSBAR_X * scaledWidth) - ((widthLocation / 2F) * BossbarConfig.SCALE), BossbarConfig.BOSSBAR_Y * scaledHeight, 0);
                 GlStateManager.scale(BossbarConfig.SCALE, BossbarConfig.SCALE, BossbarConfig.SCALE);
 
+                guiIngame.drawTexturedModalRect(0, 0, 0, 74, widthLocation, 5);
                 guiIngame.drawTexturedModalRect(0, 0, 0, 74, widthLocation, 5);
 
                 if (healthScale > 0) {
