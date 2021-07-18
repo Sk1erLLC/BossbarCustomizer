@@ -28,6 +28,12 @@ public class BossbarGui extends GuiScreen {
     public void initGui() {
         buttonList.clear();
 
+        if (BossStatus.bossName != null && !BossStatus.bossName.equals("Sk1er LLC")) {
+            previousBossName = BossStatus.bossName;
+            previousStatusBarTime = BossStatus.statusBarTime;
+            previousHealthScale = BossStatus.healthScale;
+        }
+
         BossStatus.bossName = "Sk1er LLC";
         BossStatus.statusBarTime = Integer.MAX_VALUE;
         BossStatus.healthScale = 1F;
@@ -53,11 +59,6 @@ public class BossbarGui extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (BossStatus.bossName != null) {
-            previousBossName = BossStatus.bossName;
-            previousStatusBarTime = BossStatus.statusBarTime;
-            previousHealthScale = BossStatus.healthScale;
-        }
 
         if (this.dragging) {
             BossbarConfig.BOSSBAR_X = (BossbarConfig.BOSSBAR_X * width + (mouseX - this.lastMouseX)) / (double) width;
@@ -112,7 +113,7 @@ public class BossbarGui extends GuiScreen {
                 BossbarConfig.BOSSBAR_TEXT = true;
                 BossbarConfig.BOSSBAR_BAR = true;
                 BossbarConfig.BOSSBAR_X = 0.5;
-                BossbarConfig.BOSSBAR_Y = 0.025;
+                BossbarConfig.BOSSBAR_Y = 12d / this.height;
                 BossbarConfig.SCALE = 1.0;
                 BossbarMod.INSTANCE.saveConfig();
                 initGui();

@@ -25,6 +25,10 @@ public class GuiIngameHook extends Gui {
             double scaledWidth = resolution.getScaledWidth();
             double scaledHeight = resolution.getScaledHeight();
 
+            if (BossbarConfig.BOSSBAR_Y == -1d){
+                BossbarConfig.BOSSBAR_Y = 12d / scaledHeight;
+            }
+
             if (BossbarConfig.BOSSBAR_BAR) {
                 int widthLocation = 182;
                 int healthScale = (int) (BossStatus.healthScale * (float) (widthLocation + 1));
